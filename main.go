@@ -1,17 +1,20 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/lucassantos-dev/go-api/config"
 	"github.com/lucassantos-dev/go-api/router"
+)
+
+var (
+	logger *config.Logger
 )
 
 func main() {
 	err := config.Init()
 
+	logger = config.GetLogger("main")
 	if err != nil {
-		fmt.Println(err)
+		logger.Errorf("Config initialization error: %v", err)
 		return
 	}
 	router.Initializer()
